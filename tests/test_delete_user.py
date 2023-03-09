@@ -9,6 +9,7 @@ def test_delete_user(user):
     log.debug("STEP 1. Create a new user using POST request.")
     user_data = read_data('../assert/good_user.json')
     response_post_user = user.post_user(user_data)
+
     log.debug("STEP 2. Check response status code equals 201.")
     assert response_post_user.status_code == 201, f'{response_post_user.json()}'
 
