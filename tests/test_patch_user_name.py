@@ -22,7 +22,7 @@ def test_patch_user_name(user):
     assert response_patch_user.json()['name'] == user_new_data['name']
 
     log.debug("STEP 5. Delete user using DELETE request.")
-    user.delete_user(id_user=response_patch_user.json()["id"])
+    response_delete_user = user.delete_user(id_user=response_patch_user.json()["id"])
 
     log.debug("STEP 6. Check response status code equals 204.")
-    assert response.status_code == 204
+    assert response_delete_user.status_code == 204
