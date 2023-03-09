@@ -8,16 +8,16 @@ class User:
                     "Content-Type": "application/json"}
 
     def __init__(self):
-        self.user = Api(self.base_url, self.base_headers)
+        self.api = Api(self.base_url, self.base_headers)
 
     def get_user(self, params):
-        return self.user.do_request(method="GET", params=params)
+        return self.api.do_request(method="GET", params=params)
 
     def post_user(self, json):
-        return self.user.do_request(method="POST", json=json)
+        return self.api.do_request(method="POST", json=json)
 
     def delete_user(self, id_user):
-        return self.user.do_request(method="DELETE", endpoint=f'/{id_user}')
+        return self.api.do_request(method="DELETE", endpoint=f'/{id_user}')
 
     def patch_user(self, id_user, json):
-        return self.user.do_request(method="PATCH", endpoint=f'/{id_user}', json=json)
+        return self.api.do_request(method="PATCH", endpoint=f'/{id_user}', json=json)

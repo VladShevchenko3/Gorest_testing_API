@@ -6,7 +6,7 @@ from User import User
 from read_with_json_file import read_data
 
 
-@pytest.fixture(scope="function")
+@pytest.fixture(scope="session")
 def user():
     return User()
 
