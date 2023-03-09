@@ -2,7 +2,7 @@ import logging
 from read_with_json_file import read_data
 
 
-def test_post_existed_user(user):
+def test_post_existed_user(user, global_var):
     logging.basicConfig(level=logging.DEBUG)
     log = logging.getLogger(__name__)
 
@@ -20,8 +20,5 @@ def test_post_existed_user(user):
     assert response_post_existed_user.status_code == 422
     assert response_post_existed_user.json()[0]['message'] == 'has already been taken'
 
-    log.debug("STEP 5. Delete user using DELETE request.")
-    response_delete_user = user.delete_user(id_user=response_post_user.json()["id"])
-
-    log.debug("STEP 6. Check response status code equals 204.")
-    assert response_delete_user.status_code == 204
+    log.debug("STEP 5. Add user id to `global_var` fixture.")
+    global_var['client_id'] = response_post_user.json()['id'] if 'id' in response_post_user.json() else None

@@ -2,7 +2,7 @@ import logging
 from read_with_json_file import read_data
 
 
-def test_patch_user_name(user):
+def test_patch_user_name(user, global_var):
     logging.basicConfig(level=logging.DEBUG)
     log = logging.getLogger(__name__)
 
@@ -21,8 +21,5 @@ def test_patch_user_name(user):
     assert response_patch_user.status_code == 200
     assert response_patch_user.json()['name'] == user_new_data['name']
 
-    log.debug("STEP 5. Delete user using DELETE request.")
-    response_delete_user = user.delete_user(id_user=response_patch_user.json()["id"])
-
-    log.debug("STEP 6. Check response status code equals 204.")
-    assert response_delete_user.status_code == 204
+    log.debug("STEP 5. Add user id to `global_var` fixture.")
+    global_var['client_id'] = response_patch_user.json()['id'] if 'id' in response_patch_user.json() else None
